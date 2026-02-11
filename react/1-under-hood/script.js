@@ -13,6 +13,8 @@ function Counter() {
     // );
 
     // with JSX
+    console.log("child render");
+
     return (
         <div>
             <p>Count: {count}</p>
@@ -22,5 +24,27 @@ function Counter() {
     );
 }
 
+function CounterParent() {
+    const [showMessage, setShowMessage] = React.useState(false);
+    const [showMessage2, setShowMessage2] = React.useState(false);
+
+    const toggleMessage = () => {
+        setShowMessage(!showMessage);
+        setShowMessage2(!showMessage2);
+    }
+
+    console.log("parent render");
+
+    return (
+        <div>
+            <h1>Counter App</h1>
+            <Counter />
+            {showMessage && <p>This is a message</p>}
+            {showMessage2 && <p>This is another message</p>}
+            <button onClick={toggleMessage}>Toggle Message</button>
+        </div>
+    )
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(React.createElement(Counter));
+root.render(React.createElement(CounterParent));
